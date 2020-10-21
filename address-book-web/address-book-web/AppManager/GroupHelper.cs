@@ -3,20 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 
 namespace address_book_web
 {
-    public class GroupHelper
+    public class GroupHelper : HelperBase
     {
-        private IWebDriver driver;
 
-        public GroupHelper(IWebDriver driver)
+        public GroupHelper(IWebDriver driver) : base(driver)
         {
-            this.driver = driver;
+
         }
+
         public void ReturnToGroupPage()
         {
             driver.FindElement(By.LinkText("group page")).Click();

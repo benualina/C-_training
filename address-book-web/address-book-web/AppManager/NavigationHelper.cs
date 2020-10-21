@@ -11,20 +11,18 @@ using OpenQA.Selenium.Support.UI;
 
 namespace address_book_web
 {
-    public class NavigationHelper
+    public class NavigationHelper : HelperBase
     {
-        private IWebDriver driver;
         private string baseURL;
 
-        public NavigationHelper(IWebDriver driver, string baseURL)
+        public NavigationHelper(IWebDriver driver, string baseURL) : base(driver)
         {
-            this.driver = driver;
             this.baseURL = baseURL;
         }
 
         public void GotoHomepage()
         {
-            driver.Navigate().GoToUrl(baseURL + "http://localhost/addressbook/");
+            driver.Navigate().GoToUrl(baseURL);
         }
         public void GotoGroupsPage()
         {
