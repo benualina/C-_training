@@ -17,18 +17,18 @@ namespace address_book_web
         {
             driver.Navigate().GoToUrl(baseURL);
             driver.FindElement(By.XPath("//html")).Click();
-            Login(new AccountData("admin", "secret"));
-            ContactCreation();
+            loginHelper.Login(new AccountData("admin", "secret"));
+            groupHelper.ContactCreation();
             ContactData contact = new ContactData("Аксенова");
             contact.Address = "г.Москва, ул Арбат, дом 12";
             contact.Company = "ООО Компания";
             contact.Email = "aksol@gmail.com";
             contact.Homenumber = "+74956723399";
             contact.Email = "aksol@gmail.com";
-            FillContactForm(contact);
-            SubmitContactCreation();
-            ReturtToHomepage();
-            Logout();
+            groupHelper.FillContactForm(contact);
+            groupHelper.SubmitContactCreation();
+            groupHelper.ReturtToHomepage();
+            groupHelper.Logout();
         }
 
         

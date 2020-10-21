@@ -12,12 +12,12 @@ namespace address_book_web
         [Test]
         public void TheUntitledTestCaseTest()
         {
-            GotoHomepage();
-            Login(new AccountData("admin", "secret"));
-            GotoGroupsPage();
-            SelectGroup(1);
-            DeleteGroup();
-            ReturnToGroupPage();
+            navigator.GotoHomepage();
+            loginHelper.Login(new AccountData("admin", "secret"));
+            navigator.GotoGroupsPage();
+            groupHelper.SelectGroup(1);
+            groupHelper.DeleteGroup();
+            groupHelper.ReturnToGroupPage();
         }
 
     }
