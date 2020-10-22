@@ -13,14 +13,9 @@ namespace address_book_web
     public class GroupRemovalTests : TestBase
     {
         [Test]
-        public void TheUntitledTestCaseTest()
+        public void GroupRemovalTest()
         {
-            app.Navigator.GotoHomepage();
-            app.Auth.Login(new AccountData("admin", "secret"));
-            app.Navigator.GotoGroupsPage();
-            app.Groups.SelectGroup(1);
-            app.Groups.DeleteGroup();
-            app.Groups.ReturnToGroupPage();
+            app.Groups.Remove(1);
         }
 
     }

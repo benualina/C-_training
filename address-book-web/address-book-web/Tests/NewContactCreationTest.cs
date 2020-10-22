@@ -15,21 +15,15 @@ namespace address_book_web
         [Test]
         public void NewContactCreation()
         {
-            app.Navigator.GotoHomepage();
-            app.Auth.Login(new AccountData("admin", "secret"));
-            app.Groups.ContactCreation();
-            ContactData contact = new ContactData("Аксенова");
-            contact.Address = "г.Москва, ул Арбат, дом 12";
-            contact.Company = "ООО Компания";
-            contact.Email = "aksol@gmail.com";
-            contact.Homenumber = "+74956723399";
-            contact.Email = "aksol@gmail.com";
-            app.Groups.FillContactForm(contact);
-            app.Groups.SubmitContactCreation();
-            app.Groups.ReturtToHomepage();
-            app.Groups.Logout();
+            ContactData contact = new ContactData("Франчук");
+            contact.Address = "г.Москва, ул Савеловская, дом 13а";
+            contact.Company = "ООО Мороз";
+            contact.Email = "324@gmail.com";
+            contact.Homenumber = "+74956234133";
+            app.Contacts.Createcontact(contact);
+
         }
 
-        
+
     }
 }

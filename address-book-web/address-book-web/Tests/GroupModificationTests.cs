@@ -10,15 +10,14 @@ using OpenQA.Selenium.Support.UI;
 
 namespace address_book_web
 {
-    public class HelperBase
+    [TestFixture]
+    public class GroupModificationTests : TestBase
     {
-        protected ApplicationManager manager;
-        protected IWebDriver driver;
-
-        public HelperBase(ApplicationManager manager)
+        [Test]
+        public void GroupModificationTest()
         {
-            this.manager = manager;
-            driver = manager.Driver;
+
         }
+
     }
 }

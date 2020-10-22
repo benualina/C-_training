@@ -15,17 +15,21 @@ namespace address_book_web
         [Test]
         public void GroupCreationTest()
         {
-            app.Navigator.GotoHomepage();
-            app.Auth.Login(new AccountData("admin", "secret"));
-            app.Navigator.GotoGroupsPage();
-            app.Groups.CreationNewGroup();
             GroupData group = new GroupData("342");
             group.Header = "dsf";
             group.Footer = "32";
-            app.Groups.FillGroupForm(group);
-            app.Groups.SubmitGroupCreation();
-            app.Groups.ReturnToGroupPage();
-            app.Groups.Logout();
+
+            app.Groups.Create(group);
+        }
+
+        [Test]
+        public void EmptyGroupCreationTest()
+        {
+            GroupData group = new GroupData("");
+            group.Header = "";
+            group.Footer = "";
+
+            app.Groups.Create(group);
         }
     }
 }

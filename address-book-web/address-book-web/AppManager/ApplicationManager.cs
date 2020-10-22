@@ -16,12 +16,24 @@ namespace address_book_web
         protected LoginHelper loginHelper;
         protected NavigationHelper navigator;
         protected GroupHelper groupHelper;
+        protected ContactHelper contactHelper;
 
         public ApplicationManager()
         {
-            loginHelper = new LoginHelper(driver);
-            navigator = new NavigationHelper(driver, baseURL);
-            groupHelper = new GroupHelper(driver);
+            driver = new FirefoxDriver();
+            baseURL = "http://localhost/addressbook";
+            loginHelper = new LoginHelper(this);
+            navigator = new NavigationHelper(this, baseURL);
+            groupHelper = new GroupHelper(this);
+            contactHelper = new ContactHelper(this);
+
+        }
+        public IWebDriver Driver 
+        { 
+        get
+            {
+                return driver;
+            }
         }
 
         public void Stop()
@@ -55,6 +67,16 @@ namespace address_book_web
             get
             {
                 return groupHelper;
+            }
+
+        }
+
+
+        public ContactHelper Contacts
+        {
+            get
+            {
+                return contactHelper;
             }
 
         }
