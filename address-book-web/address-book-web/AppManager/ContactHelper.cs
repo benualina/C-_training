@@ -18,6 +18,17 @@ namespace address_book_web
 
         }
 
+        public ContactHelper Remove(int v)
+        {
+            manager.Navigator.GotoHomepage();
+            SelectContact(v);
+            DeleteContact();
+            ReturtToHomepage();
+            return this;
+        }
+
+
+
         public ContactHelper Createcontact(ContactData contact)
         {
             ContactCreation();
@@ -26,6 +37,18 @@ namespace address_book_web
             ReturtToHomepage();
             return this;
         }
+
+        public ContactHelper Modify(int v, ContactData newData)
+        {
+            manager.Navigator.GotoHomepage();
+            SelectContact(v);
+            InitContactModification();
+            FillContactForm(newData);
+            SubmitContactModification();
+            ReturtToHomepage();
+            return this;
+        }
+
         public ContactHelper SubmitContactCreation()
         {
             driver.FindElement(By.XPath("(//input[@name='submit'])[2]")).Click();
@@ -69,6 +92,31 @@ namespace address_book_web
             return this;
         }
 
+        public ContactHelper SubmitContactModification()
+        {
+            driver.FindElement(By.XPath("(//input[@name='update'])[2]")).Click();
+            return this;
+        }
+
+        public ContactHelper InitContactModification()
+        {
+            driver.FindElement(By.XPath("//img[@alt='Edit']")).Click();
+            return this;
+        }
+
+        public ContactHelper SelectContact(int index)
+        {
+            //driver.FindElement(By.Id("\""index"\"")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            return this;
+        }
+
+        public ContactHelper DeleteContact()
+        {
+            driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            driver.SwitchTo().Alert().Accept();
+            return this;
+        }
     }
 
 }

@@ -21,12 +21,26 @@ namespace address_book_web
         public GroupHelper Remove(int v)
         {
             manager.Navigator.GotoGroupsPage();
-                SelectGroup(1);
+                SelectGroup(v);
                 DeleteGroup();
                 ReturnToGroupPage();
                 return this;
 
         }
+
+        public GroupHelper Modify(int v, GroupData newData)
+        {
+            manager.Navigator.GotoGroupsPage();
+            SelectGroup(v);
+            InitGroupModification();
+            FillGroupForm(newData);
+            SubmitGroupModification();
+            ReturnToGroupPage();
+            return this;
+
+        }
+
+
 
         //Метод создания группы контактов
         public GroupHelper Create(GroupData group)
@@ -90,6 +104,18 @@ namespace address_book_web
         public GroupHelper Logout()
         {
             driver.FindElement(By.LinkText("Logout")).Click();
+            return this;
+        }
+
+        public GroupHelper SubmitGroupModification()
+        {
+            driver.FindElement(By.Name("update")).Click();
+            return this;
+        }
+
+        public GroupHelper InitGroupModification()
+        {
+            driver.FindElement(By.Name("edit")).Click();
             return this;
         }
 
