@@ -13,20 +13,11 @@ namespace address_book_web
     public class TestBase
     {
         protected ApplicationManager app;
-
         [SetUp]
-        public void SetupTest()
+        public void SetupApplicationManager()
         {
-            app = new ApplicationManager();
-            app.Navigator.GotoHomepage();
-            app.Auth.Login(new AccountData("admin", "secret"));
+            app = ApplicationManager.GetInstanse();
         }
 
-        [TearDown]
-        public void TeardownTest()
-        {
-            app.Stop();
-       
-        }
     }
 }

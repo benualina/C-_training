@@ -56,27 +56,13 @@ namespace address_book_web
         }
         public ContactHelper FillContactForm(ContactData contact)
         {
-            driver.FindElement(By.Name("firstname")).Click();
-            driver.FindElement(By.Name("firstname")).Clear();
-            driver.FindElement(By.Name("firstname")).SendKeys(contact.Firstname);
-            driver.FindElement(By.Name("lastname")).Click();
-            driver.FindElement(By.Name("lastname")).Clear();
-            driver.FindElement(By.Name("lastname")).SendKeys(contact.Lastname);
-            driver.FindElement(By.Name("nickname")).Click();
-            driver.FindElement(By.Name("nickname")).Clear();
-            driver.FindElement(By.Name("nickname")).SendKeys(contact.Nickname);
-            driver.FindElement(By.Name("company")).Click();
-            driver.FindElement(By.Name("company")).Clear();
-            driver.FindElement(By.Name("company")).SendKeys(contact.Company);
-            driver.FindElement(By.Name("address")).Click();
-            driver.FindElement(By.Name("address")).Clear();
-            driver.FindElement(By.Name("address")).SendKeys(contact.Address);
-            driver.FindElement(By.Name("home")).Click();
-            driver.FindElement(By.Name("home")).Clear();
-            driver.FindElement(By.Name("home")).SendKeys(contact.Homenumber);
-            driver.FindElement(By.Name("email")).Click();
-            driver.FindElement(By.Name("email")).Clear();
-            driver.FindElement(By.Name("email")).SendKeys(contact.Email);
+            Type(By.Name("lastname"), contact.Firstname);
+            Type(By.Name("firstname"), contact.Lastname);
+            Type(By.Name("nickname"), contact.Nickname);
+            Type(By.Name("company"), contact.Company);
+            Type(By.Name("address"), contact.Address);
+            Type(By.Name("home"), contact.Homenumber);
+            Type(By.Name("email"), contact.Email);
             return this;
         }
 
@@ -106,7 +92,20 @@ namespace address_book_web
 
         public ContactHelper SelectContact(int index)
         {
-            //driver.FindElement(By.Id("\""index"\"")).Click();
+            if(IsElementPresent(By.XPath("(//input[@name='selected[]'])[" + index + "]")))
+            { 
+                driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            }
+            else
+            {
+                ApplicationManager app = ApplicationManager.GetInstanse();
+                ContactData contact = new ContactData("Франчук");
+                contact.Address = "г.Москва, ул Савеловская, дом 13а";
+                contact.Company = "ООО Мороз";
+                contact.Email = "324@gmail.com";
+                contact.Homenumber = "+74956234133";
+                app.Contacts.Createcontact(contact);
+            }
             driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
             return this;
         }

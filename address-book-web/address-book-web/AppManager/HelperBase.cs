@@ -20,5 +20,26 @@ namespace address_book_web
             this.manager = manager;
             driver = manager.Driver;
         }
+        public void Type(By locator, string text)
+        {
+            //если текст не null, то заполняются поля, иначе ничего не делаем
+            if (text != null)
+            {
+                driver.FindElement(locator).Clear();
+                driver.FindElement(locator).SendKeys(text);
+            }
+        }
+        public bool IsElementPresent(By by)
+        {
+            try
+            {
+                driver.FindElement(by);
+                return true;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
+        }
     }
 }

@@ -10,7 +10,7 @@ using OpenQA.Selenium.Support.UI;
 namespace address_book_web
 {
     [TestFixture]
-    public class GroupCreationTests: TestBase
+    public class GroupCreationTests: AuthTestBase
     {
         [Test]
         public void GroupCreationTest()
@@ -18,17 +18,6 @@ namespace address_book_web
             GroupData group = new GroupData("342");
             group.Header = "dsf";
             group.Footer = "32";
-
-            app.Groups.Create(group);
-        }
-
-        [Test]
-        public void EmptyGroupCreationTest()
-        {
-            GroupData group = new GroupData("");
-            group.Header = "";
-            group.Footer = "";
-
             app.Groups.Create(group);
         }
     }
