@@ -21,16 +21,18 @@ namespace address_book_web
         public GroupHelper Remove(int v)
         {
             manager.Navigator.GotoGroupsPage();
-                SelectGroup(v);
-                DeleteGroup();
-                ReturnToGroupPage();
-                return this;
+            GroupExistanceCheck(v);
+            SelectGroup(v);
+            DeleteGroup();
+            ReturnToGroupPage();
+            return this;
 
         }
 
         public GroupHelper Modify(int v, GroupData newData)
         {
             manager.Navigator.GotoGroupsPage();
+            GroupExistanceCheck(v);
             SelectGroup(v);
             InitGroupModification();
             FillGroupForm(newData);
@@ -65,18 +67,6 @@ namespace address_book_web
 
         public GroupHelper SelectGroup(int index)
         {
-            if (IsElementPresent(By.XPath("(//input[@name='selected[]'])[" + index + "]")))
-            { 
-                driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click(); 
-            }
-            else
-            {
-                ApplicationManager app = ApplicationManager.GetInstanse();
-                GroupData group = new GroupData("342");
-                group.Header = "dsf";
-                group.Footer = "32";
-                app.Groups.Create(group);
-            }
             driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
             return this;
         }
@@ -120,5 +110,21 @@ namespace address_book_web
             return this;
         }
 
+        public GroupHelper GroupExistanceCheck(int index)
+        {
+            if (IsElementPresent(By.XPath("(//input[@name='selected[]'])[" + index + "]")))
+            {
+                return this;
+            }
+            else
+            {
+                ApplicationManager app = ApplicationManager.GetInstanse();
+                GroupData group = new GroupData("342");
+                group.Header = "dsf";
+                group.Footer = "32";
+                app.Groups.Create(group);
+            }
+            return this;
+        }
     }
 }

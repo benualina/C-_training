@@ -18,17 +18,6 @@ namespace address_book_web
 
         }
 
-        public ContactHelper Remove(int v)
-        {
-            manager.Navigator.GotoHomepage();
-            SelectContact(v);
-            DeleteContact();
-            ReturtToHomepage();
-            return this;
-        }
-
-
-
         public ContactHelper Createcontact(ContactData contact)
         {
             ContactCreation();
@@ -38,9 +27,20 @@ namespace address_book_web
             return this;
         }
 
+        public ContactHelper Remove(int v)
+        {
+            manager.Navigator.GotoHomepage();
+            ContactExistanceCheck(v);
+            SelectContact(v);
+            DeleteContact();
+            ReturtToHomepage();
+            return this;
+        }
+
         public ContactHelper Modify(int v, ContactData newData)
         {
             manager.Navigator.GotoHomepage();
+            ContactExistanceCheck(v);
             SelectContact(v);
             InitContactModification();
             FillContactForm(newData);
@@ -92,9 +92,21 @@ namespace address_book_web
 
         public ContactHelper SelectContact(int index)
         {
-            if(IsElementPresent(By.XPath("(//input[@name='selected[]'])[" + index + "]")))
-            { 
-                driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            return this;
+        }
+
+        public ContactHelper DeleteContact()
+        {
+            driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            driver.SwitchTo().Alert().Accept();
+            return this;
+        }
+        public ContactHelper ContactExistanceCheck(int index)
+        {
+            if (IsElementPresent(By.XPath("(//input[@name='selected[]'])[" + index + "]")))
+            {
+                return this;
             }
             else
             {
@@ -106,14 +118,6 @@ namespace address_book_web
                 contact.Homenumber = "+74956234133";
                 app.Contacts.Createcontact(contact);
             }
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
-            return this;
-        }
-
-        public ContactHelper DeleteContact()
-        {
-            driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
-            driver.SwitchTo().Alert().Accept();
             return this;
         }
     }

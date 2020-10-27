@@ -18,9 +18,7 @@ namespace address_book_web
             newData.Company = "ООО Экспо";
             newData.Email = "aaa@gmail.com";
             newData.Homenumber = "+74234324";
-
             app.Contacts.Modify(1, newData);
-
         }
     }
 }
