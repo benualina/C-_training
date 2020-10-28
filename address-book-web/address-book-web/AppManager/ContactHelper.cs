@@ -30,7 +30,6 @@ namespace address_book_web
         public ContactHelper Remove(int v)
         {
             manager.Navigator.GotoHomepage();
-            ContactExistanceCheck(v);
             SelectContact(v);
             DeleteContact();
             ReturtToHomepage();
@@ -40,7 +39,6 @@ namespace address_book_web
         public ContactHelper Modify(int v, ContactData newData)
         {
             manager.Navigator.GotoHomepage();
-            ContactExistanceCheck(v);
             SelectContact(v);
             InitContactModification();
             FillContactForm(newData);
@@ -104,6 +102,7 @@ namespace address_book_web
         }
         public ContactHelper ContactExistanceCheck(int index)
         {
+            manager.Navigator.GotoHomepage();
             if (IsElementPresent(By.XPath("(//input[@name='selected[]'])[" + index + "]")))
             {
                 return this;

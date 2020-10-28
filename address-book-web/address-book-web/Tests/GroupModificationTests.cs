@@ -14,9 +14,9 @@ namespace address_book_web
         public void GroupModificationTest()
         {
             GroupData newData = new GroupData("Переименованная группа");
-            newData.Header = null;
-            newData.Footer = null;
-
+            newData.Header = "ААА";
+            newData.Footer = "БББ";
+            app.Groups.GroupExistanceCheck(1);
             app.Groups.Modify(1, newData);
         }
 

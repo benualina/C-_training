@@ -21,7 +21,6 @@ namespace address_book_web
         public GroupHelper Remove(int v)
         {
             manager.Navigator.GotoGroupsPage();
-            GroupExistanceCheck(v);
             SelectGroup(v);
             DeleteGroup();
             ReturnToGroupPage();
@@ -32,7 +31,6 @@ namespace address_book_web
         public GroupHelper Modify(int v, GroupData newData)
         {
             manager.Navigator.GotoGroupsPage();
-            GroupExistanceCheck(v);
             SelectGroup(v);
             InitGroupModification();
             FillGroupForm(newData);
@@ -112,6 +110,7 @@ namespace address_book_web
 
         public GroupHelper GroupExistanceCheck(int index)
         {
+            manager.Navigator.GotoGroupsPage();
             if (IsElementPresent(By.XPath("(//input[@name='selected[]'])[" + index + "]")))
             {
                 return this;
