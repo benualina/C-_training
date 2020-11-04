@@ -6,6 +6,7 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
+using System.Collections.Generic;
 
 namespace address_book_web
 {
@@ -15,8 +16,20 @@ namespace address_book_web
         [Test]
         public void GroupRemovalTest()
         {
+            // читаем из браузера старый список
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
+
             app.Groups.GroupExistanceCheck(1);
-            app.Groups.Remove(1);
+            app.Groups.Remove(0);
+
+           //читаем из браузера новый список
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+
+            oldGroups.RemoveAt(0);
+
+            //сравниваются списки
+            Assert.AreEqual(oldGroups, newGroups);
+
         }
 
     }

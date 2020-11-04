@@ -27,6 +27,19 @@ namespace address_book_web
             return this;
         }
 
+        public List<ContactData> GetContactList()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+            manager.Navigator.GotoHomepage();
+            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("td.center"));
+            foreach (IWebElement element in elements)
+            //Для каждого элемента в этой коллекции нужно выполнить следующие действия:
+            {
+                contacts.Add(new ContactData(element.Text));
+            }
+            return contacts;
+        }
+
         public ContactHelper Remove(int v)
         {
             manager.Navigator.GotoHomepage();
@@ -54,8 +67,8 @@ namespace address_book_web
         }
         public ContactHelper FillContactForm(ContactData contact)
         {
-            Type(By.Name("lastname"), contact.Firstname);
-            Type(By.Name("firstname"), contact.Lastname);
+            Type(By.Name("lastname"), contact.Lastname);
+            Type(By.Name("firstname"), contact.Firstname);
             Type(By.Name("nickname"), contact.Nickname);
             Type(By.Name("company"), contact.Company);
             Type(By.Name("address"), contact.Address);
@@ -90,7 +103,7 @@ namespace address_book_web
 
         public ContactHelper SelectContact(int index)
         {
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index + 1) + "]")).Click();
             return this;
         }
 
