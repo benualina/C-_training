@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Common;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
@@ -30,11 +31,15 @@ namespace address_book_web
         public List<ContactData> GetContactList()
         {
             List<ContactData> contacts = new List<ContactData>();
+           
+            IWebElement row = driver.FindElement(By.XPath("//tr[(@name='entry')]"));
+
             manager.Navigator.GotoHomepage();
-            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("td.center"));
+            
+            ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[(@name='entry')]"));
             foreach (IWebElement element in elements)
-            //Для каждого элемента в этой коллекции нужно выполнить следующие действия:
             {
+                IList<IWebElement> cells = row.FindElements(By.TagName("td"));
                 contacts.Add(new ContactData(element.Text));
             }
             return contacts;

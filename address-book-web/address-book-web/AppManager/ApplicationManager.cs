@@ -38,7 +38,6 @@ namespace address_book_web
             }
             catch (Exception)
             {
-                // Ignore errors if unable to close the browser
             }
         }
 
