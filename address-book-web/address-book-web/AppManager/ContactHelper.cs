@@ -22,6 +22,7 @@ namespace address_book_web
         public ContactHelper Createcontact(ContactData contact)
         {
             ContactCreation();
+
             FillContactForm(contact);
             SubmitContactCreation();
             ReturtToHomepage();
